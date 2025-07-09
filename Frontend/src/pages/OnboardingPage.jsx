@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { completeOnboarding } from "../lib/api";
 import { LoaderIcon, MapPinIcon, ShipWheelIcon, ShuffleIcon } from "lucide-react";
-import { LANGUAGES } from "../constants";
+import { units } from "../constants";
 
 const OnboardingPage = () => {
   const { authUser } = useAuthUser();
@@ -13,11 +13,14 @@ const OnboardingPage = () => {
   const [formState, setFormState] = useState({
     fullName: authUser?.fullName || "",
     bio: authUser?.bio || "",
-    nativeLanguage: authUser?.nativeLanguage || "",
-    learningLanguage: authUser?.learningLanguage || "",
+    command: authUser?.command || "",
+    unit: authUser?.unit || "",
     location: authUser?.location || "",
     profilePic: authUser?.profilePic || "",
   });
+  const [listofunits, setListofunits] = useState([])
+  const [unit, setUnit] = useState({})
+  
 
   const { mutate: onboardingMutation, isPending } = useMutation({
     mutationFn: completeOnboarding,
@@ -27,12 +30,14 @@ const OnboardingPage = () => {
     },
 
     onError: (error) => {
+      console.log(error)
       toast.error(error.response.data.message);
     },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(formState)
 
     onboardingMutation(formState);
   };
@@ -103,47 +108,61 @@ const OnboardingPage = () => {
                 value={formState.bio}
                 onChange={(e) => setFormState({ ...formState, bio: e.target.value })}
                 className="textarea textarea-bordered h-24"
-                placeholder="Tell others about yourself and your language learning goals"
+                placeholder="Tell us about yourself"
               />
             </div>
 
-            {/* LANGUAGES */}
+            {/* NAF UNITS */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* NATIVE LANGUAGE */}
+              {/* COMMANDS */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Native Language</span>
+                  <span className="label-text">Command</span>
                 </label>
                 <select
-                  name="nativeLanguage"
-                  value={formState.nativeLanguage}
-                  onChange={(e) => setFormState({ ...formState, nativeLanguage: e.target.value })}
+                  name="command"
+                  value={formState.command}
+                  onChange={(e) => {
+                    setFormState({ ...formState, command: e.target.value })
+                    const command = units.find(
+                        (unit) => unit.command === e.target.value
+                      );
+                      setListofunits(command.unit);
+                  }}
                   className="select select-bordered w-full"
                 >
-                  <option value="">Select your native language</option>
-                  {LANGUAGES.map((lang) => (
-                    <option key={`native-${lang}`} value={lang.toLowerCase()}>
-                      {lang}
+                  <option value="">Select your Command</option>
+                  {units.map((command) => (
+                    <option key={`command0-${command}`} value={command.command}>
+                      {command.command}
                     </option>
                   ))}
                 </select>
               </div>
 
-              {/* LEARNING LANGUAGE */}
+              {/* UNITS */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Learning Language</span>
+                  <span className="label-text">Unit</span>
                 </label>
                 <select
-                  name="learningLanguage"
-                  value={formState.learningLanguage}
-                  onChange={(e) => setFormState({ ...formState, learningLanguage: e.target.value })}
+                  name="unit"
+                  value={formState.unit}
+                  onChange={(e) => 
+                  {
+                    const unit = listofunits.find(
+                        (unit) => unit.unit === e.target.value
+                      );
+                      setUnit(unit);
+                      setFormState({ ...formState, unit: e.target.value, location:unit['loc']})
+                  }                   
+                  }
                   className="select select-bordered w-full"
                 >
-                  <option value="">Select language you're learning</option>
-                  {LANGUAGES.map((lang) => (
-                    <option key={`learning-${lang}`} value={lang.toLowerCase()}>
-                      {lang}
+                  <option value="">Select unit</option>
+                  {listofunits.map((unit) => (
+                    <option key={`command-${unit.unit}`} value={unit.unit}>
+                      {unit.unit}
                     </option>
                   ))}
                 </select>
@@ -160,10 +179,10 @@ const OnboardingPage = () => {
                 <input
                   type="text"
                   name="location"
-                  value={formState.location}
+                  value={unit.loc}
                   onChange={(e) => setFormState({ ...formState, location: e.target.value })}
                   className="input input-bordered w-full pl-10"
-                  placeholder="City, Country"
+                  placeholder="Location"
                 />
               </div>
             </div>

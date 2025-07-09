@@ -87,7 +87,7 @@ const ChatPage = () => {
       const callUrl = `${window.location.origin}/call/${channel.id}`;
 
       channel.sendMessage({
-        text: `I've started a video call. Join me here: ${callUrl}`,
+        text: `Kindly follow this link to answer my video call: ${callUrl}`,
       });
 
       toast.success("Video call link sent successfully!");

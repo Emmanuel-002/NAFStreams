@@ -57,10 +57,10 @@ const NotificationsPage = () => {
                               <h3 className="font-semibold">{request.sender.fullName}</h3>
                               <div className="flex flex-wrap gap-1.5 mt-1">
                                 <span className="badge badge-secondary badge-sm">
-                                  Native: {request.sender.nativeLanguage}
+                                  Command: {request.sender.command}
                                 </span>
                                 <span className="badge badge-outline badge-sm">
-                                  Learning: {request.sender.learningLanguage}
+                                  Unit: {request.sender.unit}
                                 </span>
                               </div>
                             </div>
@@ -103,7 +103,7 @@ const NotificationsPage = () => {
                           <div className="flex-1">
                             <h3 className="font-semibold">{notification.recipient.fullName}</h3>
                             <p className="text-sm my-1">
-                              {notification.recipient.fullName} accepted your friend request
+                              {notification.recipient.fullName} accepted your connection request
                             </p>
                             <p className="text-xs flex items-center opacity-70">
                               <ClockIcon className="h-3 w-3 mr-1" />
@@ -112,7 +112,7 @@ const NotificationsPage = () => {
                           </div>
                           <div className="badge badge-success">
                             <MessageSquareIcon className="h-3 w-3 mr-1" />
-                            New Friend
+                            New Connection
                           </div>
                         </div>
                       </div>

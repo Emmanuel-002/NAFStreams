@@ -7,7 +7,7 @@ export async function signup(req, res) {
 
   try {
     if (!email || !password || !fullName) {
-      return res.status(400).json({ message: "All fields are required" });
+      return res.status(400).json({ message: "All fields are require" });
     }
 
     if (password.length < 6) {
@@ -105,16 +105,16 @@ export async function onboard(req, res) {
   try {
     const userId = req.user._id;
 
-    const { fullName, bio, nativeLanguage, learningLanguage, location } = req.body;
+    const { fullName, bio, command, unit, location } = req.body;
 
-    if (!fullName || !bio || !nativeLanguage || !learningLanguage || !location) {
+    if (!fullName || !bio || !command || !unit || !location) {
       return res.status(400).json({
         message: "All fields are required",
         missingFields: [
           !fullName && "fullName",
           !bio && "bio",
-          !nativeLanguage && "nativeLanguage",
-          !learningLanguage && "learningLanguage",
+          !command && "command",
+          !unit && "unit",
           !location && "location",
         ].filter(Boolean),
       });

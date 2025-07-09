@@ -25,11 +25,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    nativeLanguage: {
+    command: {
       type: String,
       default: "",
     },
-    learningLanguage: {
+    unit: {
       type: String,
       default: "",
     },
@@ -38,6 +38,10 @@ const userSchema = new mongoose.Schema(
       default: "",
     },
     isOnboarded: {
+      type: Boolean,
+      default: false,
+    },
+    isVerified: {
       type: Boolean,
       default: false,
     },

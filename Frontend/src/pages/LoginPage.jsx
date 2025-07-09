@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ShipWheelIcon } from "lucide-react";
+import { Video } from "lucide-react";
 import { Link } from "react-router";
 import useLogin from "../hooks/useLogin";
 
@@ -38,9 +38,9 @@ const LoginPage = () => {
         <div className="w-full lg:w-1/2 p-4 sm:p-8 flex flex-col">
           {/* LOGO */}
           <div className="mb-4 flex items-center justify-start gap-2">
-            <ShipWheelIcon className="size-9 text-primary" />
+            <Video className="size-9 text-primary" />
             <span className="text-3xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary  tracking-wider">
-              NAF Meet
+              NAFStreams
             </span>
           </div>
 
@@ -68,7 +68,7 @@ const LoginPage = () => {
                     </label>
                     <input
                       type="email"
-                      placeholder="hello@example.com"
+                      placeholder="emmanuel.araoye@airforce.mil.ng"
                       className="input input-bordered w-full"
                       value={loginData.email}
                       onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
@@ -82,7 +82,7 @@ const LoginPage = () => {
                     </label>
                     <input
                       type="password"
-                      placeholder="••••••••"
+                      placeholder="enter password"
                       className="input input-bordered w-full"
                       value={loginData.password}
                       onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
@@ -120,7 +120,7 @@ const LoginPage = () => {
           <div className="max-w-md p-8">
             {/* Illustration */}
             <div className="relative aspect-square max-w-sm mx-auto">
-              <img src="/i.png" alt="Language connection illustration" className="w-full h-full" />
+              <img src="/nafstreamslogo.png" alt="Logo" className="w-full h-full" />
             </div>
 
             <div className="text-center space-y-3 mt-6">
