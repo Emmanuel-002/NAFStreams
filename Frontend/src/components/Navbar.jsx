@@ -104,6 +104,9 @@ const Navbar = () => {
       </div>
     </button>
     </Link>
+    <button className="btn btn-ghost btn-circle" onClick={logoutMutation}>
+            <LogOutIcon className="h-6 w-6 text-base-content opacity-70" />
+          </button>
   </div>
 </div>
     // <nav className="bg-base-200 border-b border-base-300 sticky top-0 z-30 h-16 flex items-center">
