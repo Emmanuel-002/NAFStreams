@@ -15,6 +15,8 @@ import useAuthUser from "./hooks/useAuthUser.js";
 import Layout from "./components/Layout.jsx";
 import { useThemeStore } from "./store/useThemeStore.js";
 import CommunityPage from "./pages/CommunityPage.jsx";
+import AboutPage from "./pages/AboutPage.jsx";
+import ProfilePage from "./pages/ProfilePage.jsx";
 
 const App = () => {
   const { isLoading, authUser } = useAuthUser();
@@ -73,6 +75,30 @@ const App = () => {
               </Layout>
             ) : (
               <Navigate to={!isAuthenticated ? "/login" : "/community"} />
+            )
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            isAuthenticated && isOnboarded ? (
+              <Layout>
+                <AboutPage />
+              </Layout>
+            ) : (
+              <Navigate to={!isAuthenticated ? "/login" : "/about"} />
+            )
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            isAuthenticated && isOnboarded ? (
+              <Layout>
+                <ProfilePage />
+              </Layout>
+            ) : (
+              <Navigate to={!isAuthenticated ? "/login" : "/profile"} />
             )
           }
         />
